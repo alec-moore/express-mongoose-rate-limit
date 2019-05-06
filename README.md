@@ -14,7 +14,7 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, '!%! Error on connection to MongoDB...'));
 db.once('open', function(){ console.log('% MongoDB connection success...'); });
 
-let limitSchema = new mongoose.Schema({ 
+const limitSchema = new mongoose.Schema({ 
     ip: String,
     expireAt: { // Prepare for MongoDB TTL
         type: Date,
@@ -23,12 +23,12 @@ let limitSchema = new mongoose.Schema({
     counter: Number
 });
 
-let Limit = mongoose.model('limit', limitSchema);
+const Limit = mongoose.model('limit', limitSchema);
 ```
 ## Now using it (the important part):
 ```
 const rateLimiter = require('./lib'); // Or whatever folder index.js and mongoose_store.js are located.
-let limiter = rateLimiter({
+const limiter = rateLimiter({
     Model: Limit, // Required
     lifeTimeMs: 60*1000, // Defaults to 1 minute if not provided
     max: 15, // Required
