@@ -1,7 +1,10 @@
 # express-mongoose-rate-limit
 A simple, 0 dependency, rate limiter for Express and Mongoose.
+
+Here's an example of how to use this.
 ```
 const mongoose = require('mongoose');
+const rateLimiter = require('./lib'); // Or whatever folder index.js and mongoose_store.js are located.
 
 mongoose.connect(YOUR_MONGO_URL, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
@@ -12,7 +15,7 @@ db.once('open', function(){ console.log('% MongoDB connection success...'); });
 
 let limitSchema = new mongoose.Schema({ 
     ip: String,
-    expireAt: {
+    expireAt: { // Prepare for MongoDB TTL
         type: Date,
         default: Date.now
     },
@@ -20,4 +23,15 @@ let limitSchema = new mongoose.Schema({
 });
 
 let Limit = mongoose.model('limit', limitSchema);
+
+//Now the important part:
+
+let limiter = rateLimiter({
+    Model: Limit, // Required
+    lifeTimeMs: 60*1000, // Defaults to 1 minute if not provided
+    max: 15, // Required
+    message: "You've sent too many requests (15+) in the past minute.", // Required
+});
+
+app.get('/', limiter, (req, res) => res.send('Test!'));
 ```
