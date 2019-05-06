@@ -3,7 +3,7 @@ A simple, 0 dependency, rate limiter for Express and Mongoose.
 
 Here's an example of how to use this.
 
-For setup:
+#For setup:
 ```
 const mongoose = require('mongoose');
 
@@ -25,7 +25,7 @@ let limitSchema = new mongoose.Schema({
 
 let Limit = mongoose.model('limit', limitSchema);
 ```
-Now using it (the important part):
+#Now using it (the important part):
 ```
 const rateLimiter = require('./lib'); // Or whatever folder index.js and mongoose_store.js are located.
 let limiter = rateLimiter({
