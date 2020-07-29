@@ -11,8 +11,8 @@ mongoose.connect(YOUR_MONGO_URL, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 let db = mongoose.connection;
-db.on('error', console.error.bind(console, '!%! Error on connection to MongoDB...'));
-db.once('open', function(){ console.log('% MongoDB connection success...'); });
+db.on('error', console.error.bind(console, 'Error on connection to MongoDB.'));
+db.once('open', () => { console.log('MongoDB connection success.'); });
 
 const limitSchema = new mongoose.Schema({ 
     ip: String,
