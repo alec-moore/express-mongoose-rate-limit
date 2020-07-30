@@ -8,7 +8,6 @@ Here's an example of how to use this.
 const mongoose = require('mongoose');
 
 mongoose.connect(YOUR_MONGO_URL, { useNewUrlParser: true });
-mongoose.Promise = global.Promise;
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error on connection to MongoDB.'));
