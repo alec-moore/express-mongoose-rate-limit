@@ -1,5 +1,5 @@
 # express-mongoose-rate-limit
-A simple, 0 dependency, rate limiter for Express and Mongoose.
+A simple, effective rate limiter utilizing Express and Mongoose for Node.
 
 Here's an example of how to use this.
 
